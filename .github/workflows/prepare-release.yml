@@ -9,7 +9,7 @@ on:
 jobs:
   prepare-release:
     # To not run in forks
-    if: github.repository_owner == 'packit'
+    # if: github.repository_owner == 'packit'
     runs-on: ubuntu-latest
 
     steps:
