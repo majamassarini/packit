@@ -176,6 +176,21 @@ class TestGetBranches:
         )
         assert get_branches(*names) == versions
 
+    @pytest.mark.parametrize(
+        "names,versions",
+        [
+            (
+                {"fedora-30": {"open_pull_request_for": ["f31"]}, "fedora-stable": {}},
+                {"f30", "f32"},
+            ),
+        ],
+    )
+    def test_get_branches_from_multiple_values_in_dict(self, names, versions):
+        flexmock(packit.config.aliases).should_receive("get_versions").and_return(
+            versions,
+        )
+        assert get_branches(*names) == versions
+
     def test_get_branches_without_default(self):
         assert get_branches(default=None) == set()
 
