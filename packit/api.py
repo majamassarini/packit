@@ -1125,7 +1125,12 @@ The first dist-git commit to be synced is '{short_hash}'.
                             "source branch {local_pr_branch} can not be found on "
                             "repo {self.dg.local_project.repo_name}",
                         )
-                self.dg.checkout_branch(local_pr_branch)
+                self.dg.create_branch(
+                    local_pr_branch,
+                )
+                self.dg.switch_branch(local_pr_branch, force=True)
+                self.dg.reset_workdir()
+                self.dg.rebase_branch(dist_git_working_branch)
 
             if (
                 create_sync_note
